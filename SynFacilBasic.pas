@@ -219,6 +219,7 @@ type
     tkKeyword : TSynHighlighterAttributes;
     tkString  : TSynHighlighterAttributes;
     tkComment : TSynHighlighterAttributes;
+    tkError   : TSynHighlighterAttributes;
     //ID para los tokens
     tnEol     : integer;  //id para los tokens salto de línea
     tnSymbol  : integer;  //id para los símbolos
@@ -228,6 +229,7 @@ type
     tnKeyword : integer;  //id para las palabras claves
     tnString  : integer;  //id para las cadenas
     tnComment : integer;  //id para los comentarios
+    tnError   : integer;  //id para los errores
     {Se crea el contenedor adicional Attrib[], para los atributos, porque aunque ya se
     tiene Attribute[] en TSynCustomHighlighter, este está ordenado pro defecto y no
     ayuda en ubicar a los attributos por su índice}
@@ -1510,6 +1512,8 @@ begin
   tkComment := NewTokAttrib('Comment', tnComment);  //atributo de comentarios
   tkComment.Style := [fsItalic];
   tkComment.Foreground := clGray;
+  tkError := NewTokAttrib('Error', tnError);  //atributo de errores
+  tkError.Background := clRed;
 end;
 function TSynFacilSynBase.GetAttribByName(txt: string): TSynHighlighterAttributes;
 {Devuelve la referencia de un atributo, recibiendo su nombre. Si no lo encuentra
